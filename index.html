@@ -23,6 +23,11 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Espaço para o header fixo */
+        }
+        
         body {
             font-family: 'Roboto', sans-serif;
             color: #333;
@@ -51,6 +56,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
         
         .nav-container {
@@ -63,17 +69,33 @@
         .logo-container {
             display: flex;
             align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover {
+            transform: scale(1.03);
         }
         
         .logo {
             height: 50px;
             margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover .logo {
+            transform: rotate(-5deg);
         }
         
         .company-name {
-            font-size: 20px; /* Reduzido de 24px para 20px */
+            font-size: 20px;
             font-weight: 700;
             color: var(--dark-gray);
+            transition: color 0.3s;
+        }
+        
+        .logo-container:hover .company-name {
+            color: var(--primary);
         }
         
         nav ul {
@@ -164,6 +186,7 @@
         
         .hero-content {
             max-width: 800px;
+            animation: fadeInUp 1s ease-out;
         }
         
         .hero h1 {
@@ -176,6 +199,7 @@
             display: block;
             font-size: 4rem;
             color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .hero p {
@@ -233,6 +257,12 @@
             border-radius: 10px;
             height: 500px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         
         .about-content h3 {
@@ -260,6 +290,12 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             flex: 1;
+            transition: transform 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         .stat-item h3 {
@@ -311,6 +347,11 @@
             margin: 0 auto 25px;
             color: var(--primary);
             font-size: 28px;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: rotate(10deg) scale(1.1);
         }
         
         .service-card h3 {
@@ -376,6 +417,12 @@
             border-radius: 10px;
             min-width: 200px;
             text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .team-stat h3 {
@@ -392,7 +439,7 @@
         
         .contact-container {
             display: grid;
-            grid-template-columns: 1fr; /* Alterado para uma coluna */
+            grid-template-columns: 1fr;
             gap: 50px;
         }
         
@@ -426,6 +473,12 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
         
         .contact-icon {
@@ -439,6 +492,12 @@
             margin: 0 auto 20px;
             color: white;
             font-size: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+            background-color: var(--secondary);
         }
         
         .contact-text h4 {
@@ -527,6 +586,50 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
         
+        /* Botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 99;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Responsive */
         @media (max-width: 992px) {
             .about-container,
@@ -580,6 +683,24 @@
             .header-buttons {
                 display: none;
             }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                height: 350px;
+                order: -1;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-to-top {
+                bottom: 90px;
+                right: 20px;
+            }
         }
         
         .menu-toggle {
@@ -598,6 +719,26 @@
             .contact-item {
                 min-width: 100%;
             }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h1 span {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .back-to-top {
+                bottom: 80px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -606,11 +747,16 @@
     <a href="https://wa.me/5512991285627" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+    
+    <!-- Botão Voltar ao Topo -->
+    <a href="#inicio" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
     <!-- Header -->
     <header>
         <div class="container nav-container">
-            <div class="logo-container">
+            <div class="logo-container" id="logo-top">
                 <img src="https://lirp.cdn-website.com/68748ea7/dms3rep/multi/opt/Logo+SC-s-120w.jpg" alt="Systems & Computers Logo" class="logo">
                 <div class="company-name">Systems & Computers</div>
             </div>
@@ -624,7 +770,6 @@
                 </ul>
             </nav>
             <div class="header-buttons">
-                <!-- Removido o botão de Contato, mantido apenas WhatsApp -->
                 <a href="https://wa.me/5512991285627" class="btn-whatsapp" target="_blank">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
@@ -638,7 +783,6 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="container hero-content">
-            <!-- Alteração: "Bem-vindo à" na mesma linha -->
             <h1>Bem-vindo à<br><span>Systems & Computers</span></h1>
             <p>Há mais de 25 anos de experiência no mercado de Consultoria e Assessoria de TI, oferecemos serviços embasados no que há de melhor e mais recente em tecnologia.</p>
             <a href="#servicos" class="btn-contact">
@@ -854,10 +998,35 @@
             });
         });
         
-        // Sticky header
+        // Scroll para o topo ao clicar no logo
+        document.getElementById('logo-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Botão Voltar ao Topo
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        // Efeito de destaque no menu ao rolar
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
-            header.classList.toggle('sticky', window.scrollY > 0);
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+                header.style.background = 'rgba(255,255,255,0.95)';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
+                header.style.background = 'white';
+            }
         });
     </script>
 </body>
